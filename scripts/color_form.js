@@ -1,24 +1,36 @@
 class ColorForm {
-  constructor(formID, listID) {
+  constructor(formID, listID, database) {
     this.form = document.getElementById(formID);
     this.list = document.getElementById(listID);
+    this.db = database;
     this.input = this.form.querySelector("input[type='text'");
     this.submitButton = this.form.querySelector('button');
-    this.submitButton.addEventListener('click', (e) =>{
-      this.form.querySelector("input[type='text'");
-      let element = document.createElement("p");
-      let text = document.createTextNode(this.form.querySelector("input[type='text'").value);
-      element.appendChild(text);
-      this.list.append(element);
-      this.form.querySelector("input[type='text'").value = "";
+    this.submitButton.addEventListener('click', (e) => {
       e.preventDefault();
+      this.handleSubmit();
     });
+  }
 
-    this.input.addEventListener("keyup", (e) =>{
-      console.log(e);//0[xX][0-9a-fA-F]+
-      let hex = new RegExp(/^#(?:[0-9a-f]{3}){1,2}$/i);
+  handleSubmit(){
+    this.form.querySelector("input[type='text'");
+    let color = "#" + this.form.querySelector("input[type='text'").value
+    if (/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color)) {
+      this.createBox(color);
+      this.db.collection("colors").add({value: color});
+      this.clearForm();
+    }else{
+      this.clearForm();
+    }
+  }
 
-      console.log(this.form.querySelector("input[type='text'").value.search(hex))
-    })
+  createBox(color) {
+    let box = document.createElement('div');
+    box.classList.add('box');
+    box.style = `background: ${color}`;
+    this.list.append(box);
+  }
+
+  clearForm() {
+    this.form.querySelector("input[type='text'").value = "";
   }
 }
