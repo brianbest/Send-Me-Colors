@@ -29,7 +29,7 @@ class ColorForm {
     let box = document.createElement('div');
     box.classList.add('box');
     box.style = `background: ${color}`;
-    this.list.append(box);
+    this.list.prepend(box);
   }
 
   clearForm() {
