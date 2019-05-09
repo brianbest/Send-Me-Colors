@@ -1,6 +1,9 @@
+body{
+  margin:0;
+}
 .box {
-  width: 100px;
-  height:100px;
+  width: 100%;
+  height:100%;
 }
 
 #color-submit {
@@ -20,7 +23,8 @@
 #list {
   height: 100vh;
   width: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
   flex-wrap: wrap;
   overflow: hidden;
 }
