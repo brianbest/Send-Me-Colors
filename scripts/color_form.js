@@ -11,14 +11,16 @@ class ColorForm {
     });
   }
 
-  handleSubmit(){
-    this.form.querySelector("input[type='text'");
-    let color = "#" + this.form.querySelector("input[type='text'").value
+  handleSubmit() {
+    let color =  this.form.querySelector("input[type='text'").value
+    if (!/^#/i.test(color)) {
+      color = "#" + this.form.querySelector("input[type='text'").value
+    }
     if (/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color)) {
       this.createBox(color);
       this.db.collection("colors").add({value: color});
       this.clearForm();
-    }else{
+    } else {
       this.clearForm();
     }
   }
